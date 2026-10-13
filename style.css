@@ -1,0 +1,331 @@
+/* ===== Colors and fonts =====
+   "Mission murals" palette: warm cream background, dark text,
+   and hot pink for buttons and the current tab. */
+:root {
+  --background: #fff8ef;
+  --card: #ffffff;
+  --ink: #1d1d1f;      /* main text */
+  --muted: #5c5650;    /* lighter text */
+  --accent: #d6246e;   /* hot pink */
+  --line: #e6d9c8;     /* borders */
+  --display: "Bricolage Grotesque", "Arial Black", sans-serif;
+  --body: "Atkinson Hyperlegible", Verdana, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+main {
+  max-width: 480px;          /* one phone-width column */
+  margin: 0 auto;
+  padding: 0 16px 96px;      /* space at the bottom for the nav bar */
+}
+
+/* Makes sure hidden screens stay hidden */
+[hidden] { display: none !important; }
+
+/* Hides labels on screen, but screen readers still read them */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+/* Icons */
+svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ===== Explore screen ===== */
+.home-header { padding: 32px 0 16px; }
+
+.app-title {
+  font-family: var(--display);
+  font-size: 2.5rem;
+  line-height: 1;
+  margin: 0;
+}
+
+.app-subtitle {
+  margin: 4px 0 0;
+  color: var(--muted);
+}
+
+input, select, button {
+  font: inherit;
+  color: var(--ink);
+}
+
+.search {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 18px;
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  background: var(--card);
+}
+
+.filter-row {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr 1fr;   /* 3 filters, middle one wider for "Neighborhood" */
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.filter {
+  width: 100%;
+  min-height: 44px;
+  padding: 8px 6px;
+  font-size: 0.9375rem;
+  border: 2px solid var(--line);
+  border-radius: 8px;
+  background: var(--card);
+}
+
+.result-count {
+  margin: 16px 0 8px;
+  font-weight: 700;
+}
+
+.source {
+  margin: 24px 0 0;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+.source a { color: var(--accent); font-weight: 700; }
+
+/* ===== Cards ===== */
+.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card {
+  position: relative;          /* so the bookmark can sit in the corner */
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* The big tappable area that opens the detail page */
+.card-open {
+  display: flex;
+  gap: 14px;
+  width: 100%;
+  padding: 0 44px 0 0;         /* room on the right for the bookmark */
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Bookmark in the top-right corner of each card */
+.bookmark {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* When saved, the bookmark fills in pink */
+.bookmark[aria-pressed="true"] svg {
+  fill: var(--accent);
+  stroke: var(--accent);
+}
+
+.thumb {
+  flex: 0 0 100px;
+  min-height: 110px;
+  display: flex;
+  align-items: flex-end;
+  padding: 8px;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.card-text { padding: 12px 12px 12px 0; }
+
+.card-title {
+  display: block;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+
+.card-artist { display: block; }
+
+.card-meta {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* ===== Top of the detail and saved screens ===== */
+.screen-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 0 12px;
+}
+
+.back-button {
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.screen-title {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.35rem;
+}
+
+/* ===== Detail screen ===== */
+.type-tag {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.detail-title {
+  font-family: var(--display);
+  font-size: 2rem;
+  line-height: 1.1;
+  margin: 10px 0 4px;
+}
+
+.detail-artist {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.detail-list {
+  margin: 16px 0 20px;
+  padding: 8px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.detail-list div {
+  display: grid;
+  grid-template-columns: 9.5rem 1fr;   /* label column + info column */
+  gap: 12px;
+  padding: 8px 0;
+}
+
+.detail-list dt { color: var(--muted); }
+.detail-list dd { margin: 0; }
+
+/* ===== About screen ===== */
+.about h2 {
+  font-family: var(--display);
+  font-size: 1.15rem;
+  margin: 20px 0 4px;
+}
+.about p { margin: 0; }
+.about a { color: var(--accent); font-weight: 700; }
+
+/* ===== Buttons ===== */
+.main-button,
+.outline-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 52px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.main-button {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+}
+
+.outline-button {
+  background: var(--card);
+  border: 2px solid var(--ink);
+}
+
+/* ===== "No results" message ===== */
+.message {
+  background: var(--card);
+  border: 2px dashed var(--line);
+  border-radius: 10px;
+  padding: 24px 16px;
+  text-align: center;
+}
+
+/* ===== Bottom nav ===== */
+.bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  padding: 6px 0;
+  background: var(--card);
+  border-top: 1px solid var(--line);
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 80px;
+  min-height: 52px;
+  border: none;
+  background: none;
+  color: var(--muted);
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.nav-item.active {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ===== Outline for keyboard users ===== */
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Art SF – Public Art Explorer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<main>
+
+  <!-- ========== SCREEN 1: EXPLORE ========== -->
+  <section id="exploreScreen">
+    <header class="home-header">
+      <h1 class="app-title">Art SF</h1>
+      <p class="app-subtitle">Public Art Explorer</p>
+    </header>
+
+    <label for="searchInput" class="visually-hidden">Search artworks</label>
+    <input type="search" id="searchInput" class="search" placeholder="Search artworks, artists, or locations">
+
+    <div class="filter-row">
+      <label for="mediumFilter" class="visually-hidden">Filter by medium</label>
+      <select id="mediumFilter" class="filter">
+        <option value="all">Medium</option>
+      </select>
+
+      <label for="neighborhoodFilter" class="visually-hidden">Filter by neighborhood</label>
+      <select id="neighborhoodFilter" class="filter">
+        <option value="all">Neighborhood</option>
+      </select>
+
+      <label for="districtFilter" class="visually-hidden">Filter by supervisor district</label>
+      <select id="districtFilter" class="filter">
+        <option value="all">District</option>
+      </select>
+    </div>
+
+    <p id="resultCount" class="result-count" aria-live="polite"></p>
+
+    <div id="artworkList" class="card-list"></div>
+
+    <p class="source">
+      Data from the <a href="https://data.sfgov.org/d/r7bn-7v9c" target="_blank">Civic Art Collection on DataSF</a>
+      (City and County of San Francisco), as of April 17, 2024.
+    </p>
+  </section>
+
+  <!-- ========== SCREEN 2: ARTWORK DETAIL ========== -->
+  <section id="detailScreen" hidden>
+    <header class="screen-header">
+      <button type="button" class="back-button" onclick="goBack()" aria-label="Back">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4 7 12l8 8" /></svg>
+      </button>
+      <p class="screen-title">Art SF</p>
+    </header>
+    <div id="detailContent"></div>
+  </section>
+
+  <!-- ========== SCREEN 3: SAVED ARTWORKS ========== -->
+  <section id="savedScreen" hidden>
+    <header class="screen-header">
+      <button type="button" class="back-button" onclick="showScreen('explore')" aria-label="Back to Explore">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4 7 12l8 8" /></svg>
+      </button>
+      <h1 class="screen-title">Saved Artworks</h1>
+    </header>
+    <div id="savedList" class="card-list"></div>
+  </section>
+
+  <!-- ========== SCREEN 4: ABOUT ========== -->
+  <section id="aboutScreen" hidden>
+    <header class="screen-header">
+      <button type="button" class="back-button" onclick="showScreen('explore')" aria-label="Back to Explore">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4 7 12l8 8" /></svg>
+      </button>
+      <h1 class="screen-title">About</h1>
+    </header>
+
+    <div class="about">
+      <h2>What this is</h2>
+      <p>Art SF helps residents and visitors discover artworks in San Francisco's Civic Art Collection. Search, filter by medium, neighborhood, or district, and save artworks you want to visit.</p>
+
+      <h2>Where the data comes from</h2>
+      <p>All information comes from the <a href="https://data.sfgov.org/d/r7bn-7v9c" target="_blank">Civic Art Collection dataset on DataSF</a>, the City and County of San Francisco's open data portal. Data as of April 17, 2024.</p>
+
+      <h2>How the data was prepared</h2>
+      <p>The full dataset has 1,038 records. This app shows 100 of them. Only artworks with a known neighborhood and map location were included, and artworks listed more than once appear once. Each artwork's medium was grouped into a simpler type for filtering.</p>
+
+      <h2>Why the colored blocks?</h2>
+      <p>The city's dataset doesn't include photos, so each artwork gets a color based on its type.</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ========== BOTTOM NAV ========== -->
+<nav id="bottomNav" class="bottom-nav" aria-label="Main">
+  <button type="button" id="exploreTab" class="nav-item" onclick="showScreen('explore')">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+    Explore
+  </button>
+  <button type="button" id="savedTab" class="nav-item" onclick="showScreen('saved')">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg>
+    Saved
+  </button>
+  <button type="button" id="aboutTab" class="nav-item" onclick="showScreen('about')">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>
+    About
+  </button>
+</nav>
+
+<script src="data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
